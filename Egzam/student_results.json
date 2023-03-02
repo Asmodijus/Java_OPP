@@ -1,0 +1,25 @@
+[ {
+  "name" : "Edvinas",
+  "surname" : "Junevicius",
+  "studentId" : "558",
+  "test" : "OPP-558",
+  "mark" : 10
+}, {
+  "name" : "Edvinas",
+  "surname" : "Junevicius",
+  "studentId" : "559",
+  "test" : "Math-559",
+  "mark" : 8
+}, {
+  "name" : "Edvinas",
+  "surname" : "Lailai",
+  "studentId" : "560",
+  "test" : "Math-559",
+  "mark" : 2
+}, {
+  "name" : "Edvinas",
+  "surname" : "Pavardenis",
+  "studentId" : "557",
+  "test" : "Math-557",
+  "mark" : 4
+} ]
