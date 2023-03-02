@@ -2,6 +2,8 @@ package lt.code.academy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.databind.type.MapType;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +28,6 @@ public class Operation {
     public static void main(String[] args) {
 
 
-
         Operation op = new Operation();
         op.readStudent();
         op.readCorrect();
@@ -36,16 +37,22 @@ public class Operation {
     }
 
     private void readStudent() {
+
+        CollectionType list = objectMapper.getTypeFactory().constructCollectionType(List.class, StudentAnswer.class);
+
         try {
-            studentAnswers = objectMapper.readValue(new File(STUDENT_ANSWER), objectMapper.getTypeFactory().constructCollectionType(List.class, StudentAnswer.class));
+            studentAnswers = objectMapper.readValue(new File(STUDENT_ANSWER), list);
         } catch (IOException e) {
             System.out.println("Error reading student answers file: " + e.getMessage());
         }
     }
 
     private void readCorrect() {
+
+        MapType map = objectMapper.getTypeFactory().constructMapType(Map.class, String.class, List.class);
+
         try {
-            correctAnswers = objectMapper.readValue(new File(CORRECT_ANSWER), objectMapper.getTypeFactory().constructMapType(Map.class, String.class, List.class));
+            correctAnswers = objectMapper.readValue(new File(CORRECT_ANSWER), map);
         } catch (IOException e) {
             System.out.println("Error reading correct answers file: " + e.getMessage());
         }
@@ -60,7 +67,7 @@ public class Operation {
                     correctCount++;
                 }
             }
-            studentResults.add(new StudentResult(studentAnswer.name,studentAnswer.surname,studentAnswer.studentId,studentAnswer.testId, correctCount));
+            studentResults.add(new StudentResult(studentAnswer.name, studentAnswer.surname, studentAnswer.studentId, studentAnswer.testId, correctCount));
         }
     }
 
