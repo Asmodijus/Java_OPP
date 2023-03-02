@@ -14,19 +14,16 @@ import java.util.Map;
 
 public class Operation {
 
-
     private final static String STUDENT_ANSWER = "StudentAnswer.json";
     private final static String CORRECT_ANSWER = "CorrectAnswers.json";
     private final static String STUDENT_RESULT = "student_results.json";
 
-
     private ObjectMapper objectMapper = new ObjectMapper();
-    private List<StudentAnswer> studentAnswers = new ArrayList<>();
-    private Map<String, List<String>> correctAnswers = new HashMap<>();
+    private List<StudentAnswer> studentAnswers;
+    private Map<String, List<String>> correctAnswers;
     private List<StudentResult> studentResults = new ArrayList<>();
 
     public static void main(String[] args) {
-
 
         Operation op = new Operation();
         op.readStudent();
