@@ -13,6 +13,11 @@ import java.util.Map;
 public class Operation {
 
 
+    private final static String STUDENT_ANSWER = "StudentAnswer.json";
+    private final static String CORRECT_ANSWER = "CorrectAnswers.json";
+    private final static String STUDENT_RESULT = "student_results.json";
+
+
     private ObjectMapper objectMapper = new ObjectMapper();
     private List<StudentAnswer> studentAnswers = new ArrayList<>();
     private Map<String, List<String>> correctAnswers = new HashMap<>();
@@ -32,16 +37,15 @@ public class Operation {
 
     private void readStudent() {
         try {
-            studentAnswers = objectMapper.readValue(new File("StudentAnswer.json"), objectMapper.getTypeFactory().constructCollectionType(List.class, StudentAnswer.class));
+            studentAnswers = objectMapper.readValue(new File(STUDENT_ANSWER), objectMapper.getTypeFactory().constructCollectionType(List.class, StudentAnswer.class));
         } catch (IOException e) {
             System.out.println("Error reading student answers file: " + e.getMessage());
         }
-        System.out.println(studentAnswers);
     }
 
     private void readCorrect() {
         try {
-            correctAnswers = objectMapper.readValue(new File("CorrectAnswers.json"), objectMapper.getTypeFactory().constructMapType(Map.class, String.class, List.class));
+            correctAnswers = objectMapper.readValue(new File(CORRECT_ANSWER), objectMapper.getTypeFactory().constructMapType(Map.class, String.class, List.class));
         } catch (IOException e) {
             System.out.println("Error reading correct answers file: " + e.getMessage());
         }
@@ -63,7 +67,7 @@ public class Operation {
     private void writeStudent() {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
-            objectMapper.writeValue(new File("student_results.json"), studentResults);
+            objectMapper.writeValue(new File(STUDENT_RESULT), studentResults);
             System.out.println("Student results written to student_results.json");
         } catch (IOException e) {
             System.out.println("Error writing student results file: " + e.getMessage());
